@@ -13,4 +13,6 @@ vim.keymap.set({'n', 'x'}, 'cv', '"+p')
 --Delete using x without changing the registers
 vim.keymap.set({'n', 'x'}, 'x', '"_x')
 
+--[[Plugins]]--
 
+vim.keymap.set('n', '<space>v', '<cmd>CHADopen<cr>',{desc = 'Files'})

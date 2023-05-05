@@ -3,8 +3,8 @@ local home_dir = os.getenv("HOME")
 
 -- Plugins
 require("lazy").setup({
+	--[[Visual]] --
 
-	--Visual
 	{
 		"nvim-tree/nvim-web-devicons" },
 	--Theme
@@ -25,7 +25,7 @@ require("lazy").setup({
 					folds = true,
 				},
 			})
-			vim.cmd.colorscheme('gruvbox')
+			vim.cmd.colorscheme("gruvbox")
 		end,
 	},
 	--Start Screen
@@ -55,8 +55,13 @@ require("lazy").setup({
 			show_trailing_blankline_indent = false,
 		},
 	},
-	{ 'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
-	-- Functional
+	--Icons
+	{ "akinsho/bufferline.nvim",     version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
+
+	--Better Comments
+	{ "Djancyp/better-comments.nvim" },
+
+	--[[ Functional ]] --
 	{
 		"folke/which-key.nvim",
 		config = function()
@@ -74,6 +79,12 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" }
 	},
 
+	{
+		"ms-jpq/chadtree",
+		branch = "chad",
+		build = "python3 -m chadtree deps"
+	},
+
 	-- Highlight, edit, and navigate code
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -85,8 +96,8 @@ require("lazy").setup({
 
 	--LSP
 	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
+		"VonHeikemen/lsp-zero.nvim",
+		branch = "v2.x",
 		config = function()
 			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
 			require("lsp-zero-config")
@@ -94,7 +105,7 @@ require("lazy").setup({
 		dependencies = {
 			-- LSP manager
 			{
-				'williamboman/mason.nvim',
+				"williamboman/mason.nvim",
 			},
 			{
 				"williamboman/mason-lspconfig.nvim",
@@ -103,11 +114,23 @@ require("lazy").setup({
 					require("lsp")
 				end
 			},
-			{ 'neovim/nvim-lspconfig' },
+			{ "neovim/nvim-lspconfig" },
 			-- Autocompletion
-			{ 'hrsh7th/nvim-cmp' },
-			{ 'hrsh7th/cmp-nvim-lsp' },
-			{ 'L3MON4D3/LuaSnip' },
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "L3MON4D3/LuaSnip" },
 		}
 	},
+	--Linting
+	{
+		"dense-analysis/ale",
+		config = function()
+			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
+			require("ale-config")
+		end
+	}
+
+
+
+
 })
