@@ -61,6 +61,12 @@ require("lazy").setup({
 	--Better Comments
 	{ "Djancyp/better-comments.nvim" },
 
+	--Better Visuals
+	{
+		'stevearc/dressing.nvim',
+		opts = {},
+	},
+
 	--[[ Functional ]] --
 	{
 		"folke/which-key.nvim",
@@ -92,6 +98,14 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
 		build = ":TSUpdate",
+	},
+	--Notifications
+	{
+		"rcarriga/nvim-notify",
+		config = function()
+			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
+			require("notify-config")
+		end
 	},
 
 	--LSP
@@ -128,9 +142,32 @@ require("lazy").setup({
 			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
 			require("ale-config")
 		end
+	},
+
+	--Autpairs
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup {}
+			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
+			require("autopairs-config")
+		end
+	},
+
+	--Languages without LSP
+	{
+		"mlochbaum/BQN",
+		config = function()
+			vim.cmd "au! BufRead,BufNewFile *.bqn setf bqn"
+			vim.cmd "au! BufRead,BufNewFile * if getline(1) =~ '^#!.*bqn$' | setf bqn | endif"
+			vim.cmd "let g:nvim_bqn = 'bqn'"
+			local lazypath = vim.fn.stdpath("data") .. "/lazy/BQN"
+			vim.opt.rtp:append(lazypath .. "/editors/vim")
+		end
+	},
+	{
+		"https://git.sr.ht/~detegr/nvim-bqn"
 	}
-
-
 
 
 })
