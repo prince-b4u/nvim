@@ -1,17 +1,6 @@
-local lsp = require('lsp-zero').preset({})
-
-lsp.on_attach(function(client, bufnr)
-	lsp.default_keymaps({ buffer = bufnr })
-	lsp.buffer_autoformat()
-end)
-
--- lua
-local lspconf = require('lspconfig')
-lspconf.lua_ls.setup(lsp.nvim_lua_ls())
-
---BQN
 local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
+
 if not configs.bqnlsp then
 	configs.bqnlsp = {
 		default_config = {
@@ -20,7 +9,6 @@ if not configs.bqnlsp then
 			filetypes = { 'bqn' },
 			root_dir = util.find_git_ancestor,
 			single_file_support = false,
-			autostart = true
 		},
 		docs = {
 			description = [[
@@ -32,6 +20,3 @@ if not configs.bqnlsp then
 		},
 	}
 end
-lspconf.bqnlsp.setup {}
-
-lsp.setup()
