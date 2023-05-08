@@ -84,7 +84,7 @@ require("lazy").setup({
 		branch = "0.1.1",
 		dependencies = { "nvim-lua/plenary.nvim" }
 	},
-
+	-- File Explorer
 	{
 		"ms-jpq/chadtree",
 		branch = "chad",
@@ -153,8 +153,43 @@ require("lazy").setup({
 			require("autopairs-config")
 		end
 	},
+	--Code Runner
+	{
+		"CRAG666/code_runner.nvim",
+		config = function()
+			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
+			require("coderunner-config")
+		end
 
+	},
+	--Terminal
+	{
+		'CRAG666/betterTerm.nvim',
+		config = function()
+			--require('betterTerm').setup()
+			local betterTerm = require('betterTerm')
+			betterTerm.setup()
+			-- toggle firts term
+			vim.keymap.set({ "n", "t" }, "<C-ñ>", betterTerm.open, { desc = "Open terminal" })
+			-- Select term focus
+			vim.keymap.set({ "n", "t" }, "<space>pt", betterTerm.select, { desc = "Select terminal" })
+			-- Create new term
+			local current = 2
+			vim.keymap.set(
+				{ "n", "t" }, "<space>pn",
+				function()
+					betterTerm.open(current)
+					current = current + 1
+				end,
+				{ desc = "New terminal" }
+			)
+			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
+			require("betterterm-config")
+		end
+	},
 	--Languages without LSP
+
+	--BQN
 	{
 		"mlochbaum/BQN",
 		config = function()
