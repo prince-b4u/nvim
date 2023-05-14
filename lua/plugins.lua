@@ -4,7 +4,6 @@ local home_dir = os.getenv("HOME")
 -- Plugins
 require("lazy").setup({
 	--[[Visual]] --
-
 	{
 		"nvim-tree/nvim-web-devicons" },
 	--Theme
@@ -19,7 +18,7 @@ require("lazy").setup({
 				underline = true,
 				bold = true,
 				italic = {
-					strings = false,
+					strings = true,
 					comments = true,
 					operators = true,
 					folds = true,
@@ -148,7 +147,9 @@ require("lazy").setup({
 	{
 		"windwp/nvim-autopairs",
 		config = function()
-			require("nvim-autopairs").setup {}
+			require("nvim-autopairs").setup({
+				disable_filetype = { "TelescopePrompt", "spectre_panel", "bqn" },
+			})
 			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
 			require("autopairs-config")
 		end
