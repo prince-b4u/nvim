@@ -34,6 +34,7 @@ require("lazy").setup({
 			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
 			require("alpha-config")
 		end
+
 	},
 	--Statusline
 	{
@@ -96,6 +97,10 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
+		config = function()
+			package.path = home_dir .. "/.config/nvim/lua/after/?.lua;" .. package.path
+			require("treesitter-config")
+		end,
 		build = ":TSUpdate",
 	},
 	--Notifications
