@@ -1,18 +1,18 @@
 local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
 
-if not configs.bqnlsp then
-	configs.bqnlsp = {
+if not configs.clangd then
+	configs.clangd = {
 		default_config = {
-			cmd = { 'bqnlsp' },
+			cmd = { 'clangd' },
 			cmd_env = {},
-			filetypes = { 'bqn' },
+			filetypes = { 'cpp','c' },
 			root_dir = util.find_git_ancestor,
 			single_file_support = false,
 		},
 		docs = {
 			description = [[
-      BQN Language Server
+      C/C++ Language Server
   ]],
 			default_config = {
 				root_dir = [[util.find_git_ancestor]],
